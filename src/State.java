@@ -1,8 +1,8 @@
 public class State {
 
-    private int[][] board;
+    private int[] board;
 
-    public State(int [][]board)
+    public State(int []board)
     {
         this.board = board;
     }
@@ -12,12 +12,13 @@ public class State {
         StringBuilder ret = new StringBuilder();
         for(int i=0; i<board.length; i++)
         {
-            for(int j=0; j<board[i].length; j++)
-                ret.append(board[i][j]).append(" ");
-            ret.append("\n");
+            if(i%4==0 && i!=0)
+                ret.append("\n");
+            ret.append(board[i]).append(" ");
+
         }
 
-        return ret.toString();
+        return ret.append("\n").toString();
     }
 
 }
