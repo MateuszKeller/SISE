@@ -26,23 +26,23 @@ public class ImportExport {
         return new State(board);
     }
 
-    public static String exportInfo(SolutionInfo informations)
+    public static String exportInfo(SolutionInfo infos)
     {
         StringBuilder ret = new StringBuilder();
-        ret.append(informations.getLength()).append("\n")
-            .append(informations.getMoves());
+        ret.append(infos.getLength()).append("\n")
+            .append(infos.getMoves());
 
         return ret.toString();
     }
 
-    public static String exportExtras(SolutionInfo informations)
+    public static String exportExtras(SolutionInfo infos)
     {
         StringBuilder ret = new StringBuilder();
-        ret.append(informations.getLength()).append("\n")
-            .append(informations.getVisitedStates()).append("\n")
-            .append(informations.getProcessedStates()).append("\n")
-            .append(informations.getMaxRecursionDepth()).append("\n")
-            .append(informations.getProcessingTime());
+        ret.append(infos.getLength()).append("\n")
+            .append(infos.getVisitedStates()).append("\n")
+            .append(infos.getProcessedStates()).append("\n")
+            .append(infos.getMaxDepth()).append("\n")
+            .append(String.format("%.3f", infos.getProcessingTime())); // TODO MAKE TIME GREAT AGAIN/ READABLE
 
         return ret.toString();
     }

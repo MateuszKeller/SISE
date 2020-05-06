@@ -18,8 +18,7 @@ public enum MoveOrder {
     }
 
     public String getMoveOrder() { return moveOrder; }
-
-    public static MoveOrder checkIfCorrect(String par) throws InvalidParameterException {
+    public static MoveOrder getFromString(String par) throws InvalidParameterException {
         if(par.equals("RDUL")) return RIGHT_DOWN_UP_LEFT;
         if(par.equals("RDLU")) return RIGHT_DOWN_LEFT_UP;
         if(par.equals("DRUL")) return DOWN_RIGHT_UP_LEFT;
@@ -31,4 +30,5 @@ public enum MoveOrder {
 
         throw new InvalidParameterException("Wrong move order parameter.");
     }
+
 }

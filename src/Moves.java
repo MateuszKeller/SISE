@@ -4,13 +4,12 @@ public enum Moves {
     RIGHT   ("R"),
     UP      ("U"),
     DOWN    ("D"),
-    NO_MOVE ("N");
+    NO      ("N");
 
     private final String direction;
 
     Moves(String direction) {
         this.direction = direction;
     }
-
     public String getDirection() { return direction; }
 }
