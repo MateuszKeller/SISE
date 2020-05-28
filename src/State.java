@@ -120,6 +120,13 @@ public class State {
 
         return boardAfterMove;
     }
-
-
+    
+    public State getParent() {
+    	return this.parent;
+    }
+    
+    public Moves getMove() {
+    	return this.move;
+    }
+    
 }

@@ -6,6 +6,10 @@ public class ImportExport {
     static String initialName = "resources/4x4_01_00001.txt";
 
     public static void setFileName(String fileName) { ImportExport.initialName = fileName; }
+    
+    public static void setInitialName(String name) {
+    	initialName = name;
+    }
 
     public static State initialState()
     {

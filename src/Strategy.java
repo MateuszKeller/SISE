@@ -6,7 +6,7 @@ public abstract class Strategy {
 
     protected State currentState = null;
     protected State goalState = new State();
-    protected List<Moves> movesSoFar = new ArrayList<>();
+//    protected List<Moves> movesSoFar = new ArrayList<>();
 
     protected Set<State> exploredStates = new HashSet<>();
     protected List<State> frontierStates = new ArrayList<>();
@@ -18,5 +18,14 @@ public abstract class Strategy {
     protected boolean isSolved(State state) { return (Arrays.equals(state.getBoard(), goalState.getBoard())); }
 
     public abstract boolean solve();
+    
+    protected String getSolution(State solved) {
+    	List <String> sol = new ArrayList<String>();
+    	while(solved.getParent() != null) {
+    		sol.add(0, solved.getMove().getDirection());
+//    		System.out.println(sol);
+    		solved = solved.getParent();    	}
+    	return sol.toString();
+    }
 
 }
