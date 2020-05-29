@@ -13,6 +13,7 @@ public class ImportExport {
 
     public static State initialState()
     {
+    	//TODO change to read in table sizes
         int [] board = null;
         try
         {

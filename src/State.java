@@ -4,9 +4,19 @@ public class State {
 
     private int[] board;
     private int depth;
-
+    private int columnsNumber = 4; 
+    private int rowsNumber = 4;
+    //TODO add fields with board sizes;
     State parent;
     Moves move;
+    
+    public int getColumnsNumber() {
+    	return columnsNumber;
+    }
+    
+    public int getRowsNumber() {
+    	return rowsNumber;
+    }
 
     State(int []board)
     {
