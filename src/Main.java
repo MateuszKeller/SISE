@@ -13,8 +13,10 @@ public class Main {
         System.out.println("-------------------------------------------------------------------\n");
 
         MoveOrder moveOrder = MoveOrder.getFromString("RDUL");
-        Strategy I_HOPE_IT_WORKS = new DFS(initialState, moveOrder);
+        Strategy I_HOPE_IT_WORKS = new AStarStrategy(initialState, "manh");
         boolean works = I_HOPE_IT_WORKS.solve();
+        
+        System.out.println(works);
 
         System.out.print(ImportExport.exportExtras(I_HOPE_IT_WORKS.getSolutionInfo()));
         System.out.print(ImportExport.exportInfo(I_HOPE_IT_WORKS.getSolutionInfo()));
