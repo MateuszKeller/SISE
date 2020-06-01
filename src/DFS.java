@@ -11,6 +11,7 @@ public class DFS extends Strategy{
     DFS(State initialState, MoveOrder moveOrder)
     {
         currentState = initialState;
+        goalState = new State(currentState.getRowsNumber(),currentState.getColumnsNumber());
         this.moveOrder = moveOrder;
         frontierStates.add(currentState);
 
@@ -35,7 +36,7 @@ public class DFS extends Strategy{
             {
                 long endTime = System.nanoTime();
                 exportData = new SolutionInfo(currentState.getDepth(), getSolution(currentState), visitedStates, processedStates, maxDepth, (endTime - startTime));
-                System.out.println(currentState.toString());
+//                System.out.println(currentState.toString());
                 return true;
             }
 
@@ -52,8 +53,8 @@ public class DFS extends Strategy{
                         if (child.getDepth() > maxDepth) maxDepth = child.getDepth();
 
                         long endTime = System.nanoTime();
-                        exportData = new SolutionInfo(currentState.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
-                        System.out.println(child.toString());
+                        exportData = new SolutionInfo(child.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
+//                        System.out.println(child.toString());
                         return true;
                     }
                     frontierStates.add(0, child);
@@ -63,6 +64,9 @@ public class DFS extends Strategy{
                 }
             }
         }
+
+        long endTime = System.nanoTime();
+        exportData = new SolutionInfo(-1, "", visitedStates, processedStates, maxDepth, (endTime - startTime));
 
         return false;
     }

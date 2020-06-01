@@ -7,6 +7,7 @@ public class AStarStrategy  extends Strategy{
 	
 	public AStarStrategy(State initialState, String heuristic) {
         currentState = initialState;
+        goalState = new State(currentState.getRowsNumber(),currentState.getColumnsNumber());
 //        frontierStates.add(currentState);
 
 		if(heuristic.equals("hamm")) {
@@ -24,7 +25,7 @@ public class AStarStrategy  extends Strategy{
         
         Queue<PriorityState> frontier = new PriorityQueue<>();
         frontier.add(new PriorityState(currentState, 0));
-        Queue <State> children = null;
+//        Queue <State> children = null;
         
         
         while(!frontier.isEmpty()) {
@@ -44,24 +45,27 @@ public class AStarStrategy  extends Strategy{
         		exploredStates.add(currentState);
         	}
         	
-        	if(currentState.getDepth()<20) {
-        		children = currentState.getChildren(MoveOrder.getFromString("RDUL"));
+        	if(currentState.getDepth() < 20) {
+        		Queue <State> children = currentState.getChildren(MoveOrder.getFromString("RDUL"));
                 for (State child : children)
                 {
+//                    System.out.println(child.toString());
 //                    if (exploredStates.contains(child)) continue;
 
-                    if (isSolved(child))
-                    {
-                        if (child.getDepth() > maxDepth) maxDepth = child.getDepth();
+                    if (isSolved(child)) {
+                        if (child.getDepth() > maxDepth) { 
+                        	maxDepth = child.getDepth();
+                        }
 
                         long endTime = System.nanoTime();
-                        exportData = new SolutionInfo(currentState.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
+                        exportData = new SolutionInfo(child.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
                         System.out.println(child.toString());
                         return true;
                     }
                     
                     if(!exploredStates.contains(child)) {
-                        frontier.add(new PriorityState(currentState,calculatePriority(currentState)));
+                    	exploredStates.add(child);
+                        frontier.add(new PriorityState(child,calculatePriority(child)));
                     }
 //                    exploredStates.add(currentState);
                     visitedStates++;
@@ -69,6 +73,8 @@ public class AStarStrategy  extends Strategy{
                 }
             }	
         }
+        long endTime = System.nanoTime();
+        exportData = new SolutionInfo(-1, "", visitedStates, processedStates, maxDepth, (endTime - startTime));
 
 		return false;
 	}

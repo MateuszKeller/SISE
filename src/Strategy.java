@@ -5,13 +5,13 @@ public abstract class Strategy {
     protected SolutionInfo exportData;
 
     protected State currentState = null;
-    protected State goalState = new State();
+    protected State goalState = new State(4,4);
 //    protected List<Moves> movesSoFar = new ArrayList<>();
 
     protected Set<State> exploredStates = new HashSet<>();
     protected List<State> frontierStates = new ArrayList<>();
 
-    protected int maxDepth = 1;
+    protected int maxDepth = 0;
 
     SolutionInfo getSolutionInfo() { return exportData;}
 

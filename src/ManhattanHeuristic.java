@@ -8,7 +8,7 @@ public class ManhattanHeuristic extends Heuristic{
 		int row = state.getRowsNumber();
 //		System.out.println(col);
 		int size = state.getBoard().length;
-		State goal = new State();
+		State goal = new State(state.getRowsNumber(), state.getColumnsNumber());
 		int h; 
 		int v;
 //		int x1;
@@ -37,12 +37,12 @@ public class ManhattanHeuristic extends Heuristic{
 		return result;
 	}
 	
-	  public static void main(String[] args) {
-	    int [] board = {1,2,3,4,5,6,7,9,8,10,11,12,13,14,15,0};
-	    State second =  new State (board);
-	    ManhattanHeuristic m = new ManhattanHeuristic();
-	    System.out.println(m.calculate(second));
-	  
-	  }
+//	  public static void main(String[] args) {
+//	    int [] board = {1,2,3,4,5,6,7,9,8,10,11,12,13,14,15,0};
+//	    State second =  new State (board, );
+//	    ManhattanHeuristic m = new ManhattanHeuristic();
+//	    System.out.println(m.calculate(second));
+//	  
+//	  }
 
 }

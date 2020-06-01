@@ -18,17 +18,32 @@ public class State {
     	return rowsNumber;
     }
 
-    State(int []board)
+    State(int []board, int rows, int columns)
     {
         this.board = board;
+        columnsNumber = columns;
+        rowsNumber = rows;
+        depth = 0;
     }
-    State() { this.board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}; }
+    State(int rowsNumber, int columnsNumber) { 
+    	this.rowsNumber = rowsNumber;
+    	this.columnsNumber = columnsNumber;
+    	this.board = new int[rowsNumber*columnsNumber];
+    	for(int i = 0; i < board.length - 1; i++) {
+    		board[i] = i + 1;
+    	}
+    	board[board.length-1] = 0;
+
+    	//{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}; 
+    	}
     State(int []board, State parent, Moves preMove, int depth)
     {
         this.board = board;
         this.depth = depth;
         this.parent = parent;
         move = preMove;
+        rowsNumber = parent.getRowsNumber();
+        columnsNumber = parent.getColumnsNumber();
     }
 
     public int[] getBoard() {return board; }
@@ -66,15 +81,15 @@ public class State {
         return Arrays.equals(board, state.board);
     }
 
-    public List<Moves> getAvailableMoves() {
+    public List<Moves> getAvailableMoves(int rowsNumber, int columnsNumber) {
         List<Moves> availableMoves = new ArrayList<>();
-        int x = getIndex(0) % 4;
-        int y = getIndex(0) / 4;
+        int x = getIndex(0) % columnsNumber;
+        int y = getIndex(0) / columnsNumber;
 
         if (y > 0) availableMoves.add(Moves.UP);
-        if (y < 3) availableMoves.add(Moves.DOWN);
+        if (y < rowsNumber - 1) availableMoves.add(Moves.DOWN);
         if (x > 0) availableMoves.add(Moves.LEFT);
-        if (x < 3) availableMoves.add(Moves.RIGHT);
+        if (x < columnsNumber - 1) availableMoves.add(Moves.RIGHT);
 
         return availableMoves;
     }
@@ -82,7 +97,7 @@ public class State {
     public Queue<State> getChildren(MoveOrder moveOrder)
     {
         LinkedList<State> children = new LinkedList<>();
-        List<Moves> possibleDirections = getAvailableMoves();
+        List<Moves> possibleDirections = getAvailableMoves(rowsNumber, columnsNumber);
         possibleDirections.sort(new MovesComparator(moveOrder));
         
         for (Moves move : possibleDirections) {
@@ -100,11 +115,11 @@ public class State {
         switch (whereToMove) 
         {
             case DOWN:
-                moveIndex = (byte) (zeroIndex + 4);
+                moveIndex = (byte) (zeroIndex + columnsNumber);
 //                System.out.println(whereToMove);
                 break;
             case UP:
-                moveIndex = (byte) (zeroIndex - 4);
+                moveIndex = (byte) (zeroIndex - columnsNumber);
 //                System.out.println(whereToMove);
                 break;
             case LEFT:
@@ -118,7 +133,7 @@ public class State {
         }
 
         int[] boardAfterMove = makeMove(zeroIndex, moveIndex);
-        return new State(boardAfterMove, this, whereToMove, getDepth() + 1);
+        return new State(boardAfterMove, this, whereToMove, depth + 1);
     }
 
     private int[] makeMove(int zeroIndex, int moveIndex)
