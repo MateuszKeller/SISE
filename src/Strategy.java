@@ -6,7 +6,6 @@ public abstract class Strategy {
 
     protected State currentState = null;
     protected State goalState = new State(4,4);
-//    protected List<Moves> movesSoFar = new ArrayList<>();
 
     protected Set<State> exploredStates = new HashSet<>();
     protected List<State> frontierStates = new ArrayList<>();
@@ -23,9 +22,12 @@ public abstract class Strategy {
     	List <String> sol = new ArrayList<String>();
     	while(solved.getParent() != null) {
     		sol.add(0, solved.getMove().getDirection());
-//    		System.out.println(sol);
     		solved = solved.getParent();    	}
-    	return sol.toString();
+    	String solution = "";
+    	for(String s : sol) {
+    		solution = solution +s;
+    	}
+    	return solution;
     }
 
 }

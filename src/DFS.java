@@ -14,10 +14,8 @@ public class DFS extends Strategy{
         goalState = new State(currentState.getRowsNumber(),currentState.getColumnsNumber());
         this.moveOrder = moveOrder;
         frontierStates.add(currentState);
-
     }
 
-	
 	@Override
 	public boolean solve()
     {
@@ -36,7 +34,7 @@ public class DFS extends Strategy{
             {
                 long endTime = System.nanoTime();
                 exportData = new SolutionInfo(currentState.getDepth(), getSolution(currentState), visitedStates, processedStates, maxDepth, (endTime - startTime));
-//                System.out.println(currentState.toString());
+
                 return true;
             }
 
@@ -54,7 +52,7 @@ public class DFS extends Strategy{
 
                         long endTime = System.nanoTime();
                         exportData = new SolutionInfo(child.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
-//                        System.out.println(child.toString());
+
                         return true;
                     }
                     frontierStates.add(0, child);
@@ -73,36 +71,16 @@ public class DFS extends Strategy{
 	
 	public void reverse(Queue q)
 	{
-	    Stack s = new Stack();  //create a stack
+	    Stack s = new Stack(); 
 
-	    //while the queue is not empty
 	    while(!q.isEmpty())
-	    {  //add the elements of the queue onto a stack
+	    {
 	       s.push( q.poll());
 	    } 
 
-	    //while the stack is not empty
 	    while(!s.isEmpty())
-	    { //add the elements in the stack back to the queue
+	    {
 	      q.add(s.pop());
 	    }
-
 	}
-	
-//	public static void main(String[] args)
-//    {
-//		LinkedList<Integer> list = new LinkedList();
-//		list.add(1);
-//		list.add(2);
-//		list.add(3);
-//		Queue<Integer> toInvert = (Queue<Integer>) list;
-//		System.out.println(toInvert);
-//		reverse(toInvert);
-//		System.out.println(toInvert);
-//
-//		
-//    }
-
-	
-	
 }

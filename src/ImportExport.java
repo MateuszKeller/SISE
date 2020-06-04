@@ -15,7 +15,6 @@ public class ImportExport {
 
     public static State initialState()
     {
-    	//TODO change to read in table sizes
         int [] board = null;
         int rows = 0;
         int columns = 0;
@@ -51,12 +50,9 @@ public class ImportExport {
     public static String exportInfo(SolutionInfo infos)
     {
         StringBuilder ret = new StringBuilder();
-//        if (infos.getLength() == -1) {
-//        	 ret.append(infos.getLength());
-//        } else {
         ret.append(infos.getLength()).append("\n")
             .append(infos.getMoves());
-//        }
+        
         return ret.toString();
     }
     
@@ -78,9 +74,7 @@ public class ImportExport {
             .append(infos.getVisitedStates()).append("\n")
             .append(infos.getProcessedStates()).append("\n")
             .append(infos.getMaxDepth()).append("\n")
-//            .append(String.format("%.3f", infos.getProcessingTime())); // TODO MAKE TIME GREAT AGAIN/ READABLE
             .append(String.format("%.3f",infos.getProcessingTime())); 
-//        System.out.println("time: " + infos.getProcessingTime());
 
         return ret.toString();
     }

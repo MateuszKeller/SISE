@@ -33,8 +33,6 @@ public class State {
     		board[i] = i + 1;
     	}
     	board[board.length-1] = 0;
-
-    	//{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}; 
     	}
     State(int []board, State parent, Moves preMove, int depth)
     {
@@ -107,7 +105,7 @@ public class State {
         return children;
     }
 
-    public State makeChild(Moves whereToMove) // TODO BETTER NAME
+    public State makeChild(Moves whereToMove) 
     {
         int zeroIndex = getIndex(0);
         int moveIndex = -1;
@@ -116,19 +114,15 @@ public class State {
         {
             case DOWN:
                 moveIndex = (byte) (zeroIndex + columnsNumber);
-//                System.out.println(whereToMove);
                 break;
             case UP:
                 moveIndex = (byte) (zeroIndex - columnsNumber);
-//                System.out.println(whereToMove);
                 break;
             case LEFT:
                 moveIndex = (byte) (zeroIndex - 1);
-//                System.out.println(whereToMove);
                 break;
             case RIGHT:
                 moveIndex = (byte) (zeroIndex + 1);
-//                System.out.println(whereToMove);
                 break;
         }
 

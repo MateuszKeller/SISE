@@ -22,10 +22,6 @@ public class SolutionInfo {
 	    .setScale(3, RoundingMode.HALF_UP)
 	    .doubleValue();
         processingTime = Math.round(processingTime/1000.0 * 1000.0)/1000.0; 
-//        this.processingTime = processingTime;
-//        System.out.println("in constr this.time" + this.processingTime);
-//        System.out.println("in constr time" + processingTime);
-
     }
 
     public int getLength() { return length; }

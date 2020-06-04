@@ -8,7 +8,6 @@ public class AStarStrategy  extends Strategy{
 	public AStarStrategy(State initialState, String heuristic) {
         currentState = initialState;
         goalState = new State(currentState.getRowsNumber(),currentState.getColumnsNumber());
-//        frontierStates.add(currentState);
 
 		if(heuristic.equals("hamm")) {
 			this.heuristic = new HammingHeuristic();
@@ -24,9 +23,7 @@ public class AStarStrategy  extends Strategy{
         int processedStates = 0;
         
         Queue<PriorityState> frontier = new PriorityQueue<>();
-        frontier.add(new PriorityState(currentState, 0));
-//        Queue <State> children = null;
-        
+        frontier.add(new PriorityState(currentState, 0));      
         
         while(!frontier.isEmpty()) {
         	currentState = frontier.poll().getState();
@@ -49,9 +46,6 @@ public class AStarStrategy  extends Strategy{
         		Queue <State> children = currentState.getChildren(MoveOrder.getFromString("RDUL"));
                 for (State child : children)
                 {
-//                    System.out.println(child.toString());
-//                    if (exploredStates.contains(child)) continue;
-
                     if (isSolved(child)) {
                         if (child.getDepth() > maxDepth) { 
                         	maxDepth = child.getDepth();
@@ -67,9 +61,7 @@ public class AStarStrategy  extends Strategy{
                     	exploredStates.add(child);
                         frontier.add(new PriorityState(child,calculatePriority(child)));
                     }
-//                    exploredStates.add(currentState);
                     visitedStates++;
-
                 }
             }	
         }
@@ -78,21 +70,9 @@ public class AStarStrategy  extends Strategy{
 
 		return false;
 	}
-	
-	
+		
 	private int calculatePriority(State state) {
 		int priority = heuristic.calculate(state) + state.getDepth();
 		return priority; 
 	}
-	
-	
-	private int getStateDepth (State state){
-		int depth = 0;
-		while(state.getParent() != null) {
-			depth ++;
-			state = state.getParent();
-		}
-		return depth;
-	}
-
 }

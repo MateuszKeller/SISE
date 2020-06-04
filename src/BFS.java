@@ -10,7 +10,6 @@ public class BFS extends Strategy{
         goalState = new State(currentState.getRowsNumber(),currentState.getColumnsNumber());
         this.moveOrder = moveOrder;
         frontierStates.add(currentState);
-
     }
 
     public boolean solve()
@@ -45,25 +44,16 @@ public class BFS extends Strategy{
                     {
                         if (child.getDepth() > maxDepth) {
                         	maxDepth = child.getDepth();
-//                        	System.out.println("childDepth" + child.getDepth());
                         }
-//                    	System.out.println("maxDepth" + maxDepth);
-
 
                         long endTime = System.nanoTime();
                         exportData = new SolutionInfo(child.getDepth(), getSolution(child), visitedStates, processedStates, maxDepth, (endTime - startTime));
-//                        System.out.println("endTime" + endTime);
-//                        System.out.println("startTime" + startTime);
-//                        System.out.println(endTime - startTime);
 
-
-//                        System.out.println(child.toString());
                         return true;
                     }
                     frontierStates.add(child);
                     exploredStates.add(currentState);
                     visitedStates++;
-
                 }
             }
         }
@@ -72,8 +62,5 @@ public class BFS extends Strategy{
         exportData = new SolutionInfo(-1, "", visitedStates, processedStates, maxDepth, (endTime - startTime));
 
         return false;
-    }
-    
-    
+    } 
 }
-//currentState.toString()
